@@ -10,18 +10,21 @@ def main():
     pygame.init()
     (width, height) = (600, 600)
 
-    snake_position = (4,6)
-    snake_length = 5
     scale_factor = 20
-    snake_width = 1
+    snake_positions = [(4,6),(4,7),(4,8),(4,9),(5,9),(6,9)]
+    snake_absolute_positions = list()
+    for position in snake_positions:
+        snake_absolute_positions.append((position[0] * scale_factor, position[1] * scale_factor))
+    # snake_length = 5
+
 
     screen = pygame.display.set_mode((width, height))
-    pygame.draw.line(
+    pygame.draw.lines(
         screen,
         (255,255,255),
-        get_absolute_coordinates(snake_position[0], snake_position[1], scale_factor),
-        get_absolute_coordinates(snake_position[0]+snake_length, snake_position[1], scale_factor),
-        snake_width * scale_factor
+        False,
+        snake_absolute_positions,
+        scale_factor
     )
     pygame.display.flip()
     running = True
