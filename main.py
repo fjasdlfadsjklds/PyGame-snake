@@ -20,8 +20,15 @@ def draw_mushroom(screen,scale_factor,x,y):
     absolute_y = y*scale_factor-scale_factor/2
     screen.blit(mushroom, (absolute_x,absolute_y))
 
-# def update_mushroom_rects(mushrooms):
-#
+# def update_mushroom_rects(mushrooms, scale_factor):
+#     mushroom_rects = list()
+#     for mushroom in mushrooms:
+#         mushroom_rects.append(Rect(mushroom[0]*scale_factor-scale_factor/2,
+#                                    mushroom[1]*scale_factor-scale_factor/2,
+#                                    scale_factor,
+#                                    scale_factor))
+#     return mushroom_rects
+
 def main():
     pygame.init()
     (width, height) = (600, 600)
@@ -32,7 +39,8 @@ def main():
     snake_length = 6
     screen = pygame.display.set_mode((width, height))
     mushrooms = [(10,10)]
-    # mushroom_rects = update_mushroom_rects(mushrooms)
+    # mushroom_rects = update_mushroom_rects(mushrooms, scale_factor)
+    # print(mushroom_rects)
     snake_absolute_positions = update_absolute_positions(snake_positions, scale_factor)
     pygame.draw.lines(
         screen,
@@ -66,6 +74,7 @@ def main():
                     del snake_positions[0]
                 print(snake_positions)
                 snake_absolute_positions = update_absolute_positions(snake_positions, scale_factor)
+                print(snake_absolute_positions)
                 screen.fill((0,0,0))
                 pygame.draw.lines(
                     screen,
@@ -74,8 +83,21 @@ def main():
                     snake_absolute_positions,
                     scale_factor
                 )
+                # head_coords = [snake_positions[-1][0]-scale_factor/2,
+                #                snake_positions[-1][1]-scale_factor/2,
+                #                snake_positions[-1][0]+scale_factor/2,
+                #                snake_positions[-1][1]+scale_factor/2]
+                result = []
                 for mushroom in mushrooms:
-                    draw_mushroom(screen, scale_factor, mushroom[0], mushroom[1])
+                    # print("rects:", mushroom_rects[mushrooms.index(mushroom)])
+                    # print(head_coords)
+                    if mushroom in snake_positions:
+                        print("Collision")
+                        snake_length += 1
+                    else:
+                        draw_mushroom(screen, scale_factor, mushroom[0], mushroom[1])
+                        result.append(mushroom)
+                mushrooms = result
                 pygame.display.flip()
 
 
