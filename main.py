@@ -67,13 +67,14 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
             if event.type == pygame.KEYDOWN:
-                if event.key == ARROW_KEYS[0]:
+                #you cannot switch directions to right behind you anymore
+                if event.key == ARROW_KEYS[0] and not snake_direction == (0,1):
                     snake_direction = (0,-1)
-                if event.key == ARROW_KEYS[1]:
+                if event.key == ARROW_KEYS[1] and not snake_direction == (0,-1):
                     snake_direction = (0,1)
-                if event.key == ARROW_KEYS[2]:
+                if event.key == ARROW_KEYS[2] and not snake_direction == (1,0):
                     snake_direction = (-1,0)
-                if event.key == ARROW_KEYS[3]:
+                if event.key == ARROW_KEYS[3] and not snake_direction == (-1,0):
                     snake_direction = (1,0)
                 #set pressed to true after key is pressed
                 if event.key in ARROW_KEYS:
