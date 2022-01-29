@@ -41,7 +41,8 @@ def main():
     snake_direction = (1,0)
     global snake_length
     #new constant global variable for keys
-    global ARROW_KEYS = [pygame.K_UP, pygame.K_DOWN, pygame.K_LEFT, pygame.K_RIGHT]
+    global ARROW_KEYS
+    ARROW_KEYS = [pygame.K_UP, pygame.K_DOWN, pygame.K_LEFT, pygame.K_RIGHT]
     snake_length = 4
     screen = pygame.display.set_mode((width, height))
     mushrooms = list()
