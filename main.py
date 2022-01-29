@@ -40,6 +40,9 @@ def main():
     snake_positions = [(10,10),(11,10),(12,10),(13,10),]
     snake_direction = (1,0)
     global snake_length
+    #new global variable for the arrow keys
+    global ARROW_KEYS 
+    ARROW_KEYS = [pygame.K_UP, pygame.K_DOWN, pygame.K_LEFT, pygame.K_RIGHT]
     snake_length = 4
     screen = pygame.display.set_mode((width, height))
     mushrooms = list()
@@ -65,13 +68,13 @@ def main():
                 running = False
             if event.type == pygame.KEYDOWN:
                 #you cannot switch directions to right behind you anymore
-                if event.key == pygame.K_UP and not snake_direction == (0,1) and pressed == False:
+                if event.key == ARROW_KEYS[0] and not snake_direction == (0,1) and pressed == False:
                     snake_direction = (0,-1)
-                if event.key == pygame.K_DOWN and not snake_direction == (0,-1) and pressed == False:
+                if event.key == ARROW_KEYS[1] and not snake_direction == (0,-1) and pressed == False:
                     snake_direction = (0,1)
-                if event.key == pygame.K_LEFT and not snake_direction == (1,0) and pressed == False:
+                if event.key == ARROW_KEYS[2] and not snake_direction == (1,0) and pressed == False:
                     snake_direction = (-1,0)
-                if event.key == pygame.K_RIGHT and not snake_direction == (-1,0) and pressed == False:
+                if event.key == ARROW_KEYS[3] and not snake_direction == (-1,0) and pressed == False:
                     snake_direction = (1,0)
                 #set pressed to true after key is pressed
                 if event.key in ARROW_KEYS:
