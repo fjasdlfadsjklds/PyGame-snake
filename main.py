@@ -40,6 +40,8 @@ def main():
     snake_positions = [(10,10),(11,10),(12,10),(13,10),]
     snake_direction = (1,0)
     global snake_length
+    #new constant global variable for keys
+    global ARROW_KEYS = [pygame.K_UP, pygame.K_DOWN, pygame.K_LEFT, pygame.K_RIGHT]
     snake_length = 4
     screen = pygame.display.set_mode((width, height))
     mushrooms = list()
@@ -57,21 +59,28 @@ def main():
     snake_move_event = pygame.USEREVENT + 0
     pygame.time.set_timer(snake_move_event, 500)
     running = True
+    #new variable moved
+    pressed = False
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_UP:
+                if event.key == ARROW_KEYS[0]:
                     snake_direction = (0,-1)
-                if event.key == pygame.K_DOWN:
+                if event.key == ARROW_KEYS[1]:
                     snake_direction = (0,1)
-                if event.key == pygame.K_LEFT:
+                if event.key == ARROW_KEYS[2]:
                     snake_direction = (-1,0)
-                if event.key == pygame.K_RIGHT:
+                if event.key == ARROW_KEYS[3]:
                     snake_direction = (1,0)
+                #set pressed to true after key is pressed
+                if event.key in ARROW_KEYS:
+                    pressed = True
 
             if event.type == snake_move_event:
+                #reset pressed
+                pressed = False
                 new_snake_x = snake_direction[0] + snake_positions[-1][0]
                 new_snake_y = snake_direction[1] + snake_positions[-1][1]
                 snake_positions.append((new_snake_x,new_snake_y))
